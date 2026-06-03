@@ -6,10 +6,10 @@ struct Motor {
 };
 
 // Motores
-Motor motorA = {26, 25, 27}; //alante derecha
-Motor motorB = {14, 12, 13}; //alante izquierda
-Motor motorC = {18, 5, 19}; //atras derecha
-Motor motorD = {4, 0, 2}; //atras izquierda
+Motor motorA = {26, 25, 27}; 
+Motor motorB = {14, 12, 13}; 
+Motor motorC = {18, 5, 19}; 
+Motor motorD = {4, 0, 2}; 
 
 void setup() {
   Serial.begin(9600);
