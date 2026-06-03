@@ -1,7 +1,4 @@
-// ======================================
-// CONFIGURACIÓN DE MOTORES
-// ======================================
-
+//Estructura motores
 struct Motor {
   int in1;
   int in2;
@@ -13,10 +10,6 @@ Motor motorA = {26, 25, 27}; // delante derecha
 Motor motorB = {14, 12, 13}; // delante izquierda
 Motor motorC = {18, 5, 19};  // atrás derecha
 Motor motorD = {4, 0, 2};    // atrás izquierda
-
-// ======================================
-// SETUP
-// ======================================
 
 void setup() {
 
@@ -33,29 +26,18 @@ void setup() {
 
   stopCar();
 }
-
-// ======================================
-// CONFIGURACIÓN MOTORES
-// ======================================
-
+//configuracion de los motores
 void setupMotor(Motor m) {
   pinMode(m.in1, OUTPUT);
   pinMode(m.in2, OUTPUT);
   pinMode(m.en, OUTPUT);
 }
 
-// ======================================
-// CONTROL INDIVIDUAL MOTOR
-// ======================================
-
 void setMotor(Motor m, int direction, int speed) {
 
   speed = constrain(speed, 0, 255);
 
-  // direction:
-  // 1  = adelante
-  // -1 = atrás
-  // 0  = parado
+  // direction: 1 alante; -1 atras
 
   if (direction == 1) {
     digitalWrite(m.in1, HIGH);
@@ -73,10 +55,7 @@ void setMotor(Motor m, int direction, int speed) {
   analogWrite(m.en, speed);
 }
 
-// ======================================
-// MOVIMIENTOS DEL COCHE
-// ======================================
-
+//movimientos del coche
 void moveForward() {
 
   setMotor(motorA, 1, 180);
@@ -119,9 +98,6 @@ void stopCar() {
   Serial.println("STOP");
 }
 
-// ======================================
-// LOOP PRINCIPAL
-// ======================================
 
 void loop() {
 
@@ -130,11 +106,8 @@ void loop() {
     String comando = Serial.readStringUntil('\n');
 
     comando.trim();
-
-    // ==================================
-    // COMANDOS DESDE PYTHON
-    // ==================================
-
+    
+    //Comandos recibidos
     if (comando == "FORWARD") {
 
       moveForward();
