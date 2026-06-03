@@ -1,9 +1,9 @@
 const int servoPin = 18;  // Pin de señal del servo
 
 // Configuración PWM
-const int freq = 50;      // 50 Hz para servos
+const int freq = 50;      
 const int channel = 0;
-const int resolution = 16; // resolución PWM
+const int resolution = 16; 
 
 void setup() {
   Serial.begin(115200);
