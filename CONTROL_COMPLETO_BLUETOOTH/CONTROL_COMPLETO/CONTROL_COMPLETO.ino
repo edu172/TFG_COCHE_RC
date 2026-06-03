@@ -1,19 +1,19 @@
 #include <DabbleESP32.h>
 
-// -------- ULTRASONIDOS ----------
+//Ultrasonidos pines
 const int Trigger = 33;
 const int Echo = 34;
 
-// -------- SERVO ----------
-const int servoPin = 23; // CAMBIAR si quieres otro pin libre
+// servo pines
+const int servoPin = 23;
 const int servoChannel = 0;
 const int servoFreq = 50;
 const int servoResolution = 16;
 
-// Guarda posición actual del servo
+// Posicion inicial del servo
 int posicionServo = 0;
 
-// -------- MOTORES ---------------
+// Estructura motores
 struct Motor {
   int in1;
   int in2;
@@ -29,7 +29,6 @@ Motor motorD = {4, 0, 2};
 // Configuración Bluetooth
 #define BLUETOOTH_NAME "DabbleESP32Car"
 
-// ---------- FUNCIONES -----------
 
 void setupMotor(Motor m) {
   pinMode(m.in1, OUTPUT);
@@ -37,6 +36,7 @@ void setupMotor(Motor m) {
   pinMode(m.en, OUTPUT);
 }
 
+//Direcion motor
 void setMotor(Motor m, int direction, int speed) {
   speed = constrain(speed, 0, 255);
 
@@ -56,14 +56,11 @@ void setMotor(Motor m, int direction, int speed) {
   analogWrite(m.en, speed);
 }
 
-// ---------- SERVO ----------
-
+//Funcion del servo
 void moverServo(int angulo) {
   angulo = constrain(angulo, 0, 180);
 
-  // Evita enviar señal si ya está en esa posición
   if (angulo == posicionServo) return;
-
   posicionServo = angulo;
 
   int pulso = map(angulo, 0, 180, 500, 2400);
@@ -86,8 +83,6 @@ long medirDistancia() {
   return d;
 }
 
-// ---------- SETUP ------------
-
 void setup() {
 
   Dabble.begin(BLUETOOTH_NAME);
@@ -104,10 +99,10 @@ void setup() {
   ledcSetup(servoChannel, servoFreq, servoResolution);
   ledcAttachPin(servoPin, servoChannel);
 
-  moverServo(0); // Arranca mirando hacia delante
+  // Posicion inicial del servo hacia delante
+  moverServo(0); 
 }
 
-// ---------- LOOP -------------
 
 void loop() {
 
